@@ -18,11 +18,11 @@ Below is the preview
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 ## Contributions
 
-Contributions to Len-MD are welcomed! If you have ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+Contributions to this website are welcomed! If you have ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 ## Developer:
 
-- [**Instagram**](https://www.instagram.com/im_lennie)
+- [**Instagram**](https://www.instagram.com/i.am_lennie)
 - [**WhatsApp**](https://wa.me/254715343733)
 - [**Facebook**](
 https://www.facebook.com/lenode.khns) 
