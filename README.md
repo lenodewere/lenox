@@ -23,7 +23,7 @@ Contributions to this website are welcomed! If you have ideas for new features, 
 ## Developer:
 
 - [**Instagram**](https://www.instagram.com/i.am_lennie)
-- [**WhatsApp**](https://wa.me/254715343733)
+- [**WhatsApp**](https://wa.me/256726183520)
 - [**Facebook**](
 https://www.facebook.com/lenode.khns) 
 - [**Twitter**](https://x.com/i_am_lennie_) 
