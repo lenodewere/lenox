@@ -1,8 +1,5 @@
 Hello, this is a website built on HTML, CSS and JavaScript
 Below is the preview
-
-![Screenshot (27)](https://github.com/user-attachments/assets/d92d1c2c-d71c-487e-8db2-8b9d75f5f20f)
-
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 <h1 align="center"> MADE BY 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a> 
@@ -32,4 +29,7 @@ https://www.facebook.com/lenode.khns)
 <p align="center">
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=d1fa02&center=true&vCenter=true&multiline=false&lines=THANK+YOU✨!" alt="">
    <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+
+Below is the preview:
+![Screenshot (27)](https://github.com/user-attachments/assets/d92d1c2c-d71c-487e-8db2-8b9d75f5f20f)
 </p>
