@@ -1,7 +1,7 @@
 Hello, this is a website built on HTML, CSS and JavaScript
-Below is the preview
+
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-<h1 align="center"> MADE BY 
+<h1 align="center"> MADE BY:
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a> 
 <u> LENOX WERE </u> </h1>
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
