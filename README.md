@@ -7,7 +7,7 @@ Hello, this is a website built on HTML, CSS and JavaScript
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
   
 <p align="center">
-<a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Lenox.Were-red.svg?style=for-the-badge&logo=github"></a>
+<a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Lenox Were-red.svg?style=for-the-badge&logo=github"></a>
 </p>
 
    - ***Click [`FORK`](https://github.com/lenodewere/lenox) and `Star ⭐ Repository` for Courage.***
