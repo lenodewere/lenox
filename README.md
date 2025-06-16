@@ -19,10 +19,9 @@ Contributions to this website are welcomed! If you have ideas for new features, 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 ## Developer:
 
-- [**Instagram**](https://www.instagram.com/i.am_lennie)
+- [**Instagram**](https://www.instagram.com/simply_.lennie)
 - [**WhatsApp**](https://wa.me/256726183520)
-- [**Facebook**](
-https://www.facebook.com/lenode.khns) 
+- [**Facebook**](https://www.facebook.com/lenode.khns) 
 - [**Twitter**](https://x.com/i_am_lennie_) 
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
