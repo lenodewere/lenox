@@ -1,34 +1,34 @@
-Hello, this is a website built on HTML, CSS and JavaScript
+# A Website Built on HTML, CSS and JavaScript
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-<h1 align="center"> MADE BY:
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a> 
-<u> LENOX WERE </u> </h1>
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-  
-<p align="center">
-<a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Lenox Were-red.svg?style=for-the-badge&logo=github"></a>
-</p>
+Below is the preview:
 
-   - ***Click [`FORK`](https://github.com/lenodewere/lenox) and `Star ⭐ Repository` for Courage.***
+![Screenshot (27)](https://github.com/user-attachments/assets/d92d1c2c-d71c-487e-8db2-8b9d75f5f20f)
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+![Decorative line](https://i.imgur.com/LyHic3i.gif)
+
+## MADE BY LENOX WERE
+
+![Decorative line](https://i.imgur.com/LyHic3i.gif)
+
+![Creator](https://img.shields.io/badge/Creator-Lenox.Were-red.svg?style=for-the-badge&logo=github)
+
+- ***Click [`FORK`](https://github.com/lenodewere/lenox) and `Star ⭐ Repository` for Courage.***
+
+![Decorative line](https://i.imgur.com/LyHic3i.gif)
+
 ## Contributions
 
 Contributions to this website are welcomed! If you have ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-## Developer:
 
-- [**Instagram**](https://www.instagram.com/simply_.lennie)
+![Decorative line](https://i.imgur.com/LyHic3i.gif)
+
+## Developer
+
+- [**Instagram**](https://www.instagram.com/i.am_lennie)
 - [**WhatsApp**](https://wa.me/256726183520)
-- [**Facebook**](https://www.facebook.com/lenode.khns) 
-- [**Twitter**](https://x.com/i_am_lennie_) 
+- [**Facebook**](https://www.facebook.com/lenode.khns)
+- [**Twitter**](https://x.com/i_am_lennie_)
 
-<a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
-<p align="center">
-  <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=d1fa02&center=true&vCenter=true&multiline=false&lines=THANK+YOU✨!" alt="">
-   <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
+![Decorative line](https://i.imgur.com/LyHic3i.gif)
 
-Below is the preview:
-![Screenshot (27)](https://github.com/user-attachments/assets/d92d1c2c-d71c-487e-8db2-8b9d75f5f20f)
-</p>
+![Thank You](http://readme-typing-svg.herokuapp.com?color=d1fa02&center=true&vCenter=true&multiline=false&lines=THANK+YOU✨!)
