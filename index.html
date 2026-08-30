@@ -1390,421 +1390,424 @@
 </section>
 
 
-      <!-- =========================================
-           PAYMENT CONFIRMATION
-           ========================================= -->
+<!-- =========================================
+     PAYMENT CONFIRMATION
+========================================= -->
 
-      <section
-        class="payment-confirmation"
-        id="payment-confirmation">
+<section class="payment-confirmation" id="payment-confirmation">
 
-        <div class="container">
+  <div class="container">
 
-          <div class="section-heading">
+    <div class="section-heading">
 
-            <p class="eyebrow">
-              PAYMENT CONFIRMATION
-            </p>
+      <p class="eyebrow">
+        PAYMENT CONFIRMATION
+      </p>
 
-            <h2>
-              Confirm your
-              <span>payment.</span>
-            </h2>
+      <h2>
+        Confirm your <span>payment.</span>
+      </h2>
 
+      <p>
+        Already made your payment? Send the transaction details
+        below so I can verify your payment and begin processing
+        your project.
+      </p>
+
+    </div>
+
+
+    <div class="payment-confirmation-grid">
+
+      <!-- PAYMENT REMINDER -->
+      <div class="payment-reminder">
+
+        <div class="payment-icon">
+          ✓
+        </div>
+
+        <h3>
+          Payment made?
+        </h3>
+
+        <p>
+          Enter the transaction details exactly as they appear
+          in your M-Pesa or bank confirmation message.
+        </p>
+
+
+        <div class="payment-checklist">
+
+          <div>
+            <span>01</span>
             <p>
-              Already made your payment? Send the details below so I can
-              verify it and begin processing your project.
+              Make your payment using the payment details above.
             </p>
-
           </div>
 
-
-          <div class="payment-confirmation-grid">
-
-            <!-- PAYMENT REMINDER -->
-            <div class="payment-reminder">
-
-              <div class="payment-icon">
-                ✓
-              </div>
-
-              <h3>
-                Payment made?
-              </h3>
-
-              <p>
-                Enter the transaction details exactly as they appear
-                in your M-Pesa or bank confirmation message.
-              </p>
-
-
-              <div class="payment-checklist">
-
-                <div>
-                  <span>01</span>
-                  <p>
-                    Make your payment using the payment details above.
-                  </p>
-                </div>
-
-                <div>
-                  <span>02</span>
-                  <p>
-                    Keep your transaction/reference message.
-                  </p>
-                </div>
-
-                <div>
-                  <span>03</span>
-                  <p>
-                    Submit the confirmation form.
-                  </p>
-                </div>
-
-                <div>
-                  <span>04</span>
-                  <p>
-                    I'll verify the payment and contact you.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="payment-note">
-
-                <strong>
-                  Important
-                </strong>
-
-                <p>
-                  Submitting this form does not automatically confirm
-                  your payment. Payment is verified before work begins.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <!-- CONFIRMATION FORM -->
-            <div class="payment-form-wrapper">
-
-              <form
-                id="paymentConfirmationForm"
-                action="https://formspree.io/f/xkgrljpp"
-                method="POST">
-
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value="New Payment Confirmation - Lenox's Creations">
-
-                <div class="form-group">
-
-                  <label for="paymentName">
-                    Full Name *
-                  </label>
-
-                  <input
-                    type="text"
-                    id="paymentName"
-                    name="name"
-                    placeholder="Your full name"
-                    autocomplete="name"
-                    required>
-
-                </div>
-
-
-                <div class="form-row">
-
-                  <div class="form-group">
-
-                    <label for="paymentPhone">
-                      Phone Number *
-                    </label>
-
-                    <input
-                      type="tel"
-                      id="paymentPhone"
-                      name="phone"
-                      placeholder="07XX XXX XXX"
-                      autocomplete="tel"
-                      required>
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label for="paymentEmail">
-                      Email
-                    </label>
-
-                    <input
-                      type="email"
-                      id="paymentEmail"
-                      name="email"
-                      placeholder="you@example.com"
-                      autocomplete="email">
-
-                  </div>
-
-                </div>
-
-
-                <div class="form-row">
-
-                  <div class="form-group">
-
-                    <label for="paymentMethod">
-                      Payment Method *
-                    </label>
-
-                    <select
-                      id="paymentMethod"
-                      name="payment_method"
-                      required>
-
-                      <option value="">
-                        Select method
-                      </option>
-
-                      <option value="M-Pesa Paybill">
-                        M-Pesa Paybill
-                      </option>
-
-                      <option value="KCB Bank">
-                        KCB Bank
-                      </option>
-
-                    </select>
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label for="paymentAmount">
-                      Amount Paid (KSh) *
-                    </label>
-
-                    <input
-                      type="number"
-                      id="paymentAmount"
-                      name="amount_paid"
-                      placeholder="e.g. 5000"
-                      min="1"
-                      step="1"
-                      required>
-
-                  </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label for="transactionCode">
-                    Transaction / Reference Code *
-                  </label>
-
-                  <input
-                    type="text"
-                    id="transactionCode"
-                    name="transaction_code"
-                    placeholder="e.g. QAB123XYZ"
-                    autocomplete="off"
-                    required>
-
-                  <small>
-                    Enter the code from your payment confirmation.
-                  </small>
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label for="paymentService">
-                    Service Paid For *
-                  </label>
-
-                  <select
-                    id="paymentService"
-                    name="service"
-                    required>
-
-                    <option value="">
-                      Select service
-                    </option>
-
-                    <option value="Web Development">
-                      Web Development
-                    </option>
-
-                    <option value="Graphic Design">
-                      Graphic Design
-                    </option>
-
-                    <option value="AI Solutions">
-                      AI Solutions
-                    </option>
-
-                    <option value="Social Media Management">
-                      Social Media Management
-                    </option>
-
-                    <option value="Poetry & Script Writing">
-                      Poetry & Script Writing
-                    </option>
-
-                    <option value="Other">
-                      Other
-                    </option>
-
-                  </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label for="paymentNotes">
-                    Additional Information
-                  </label>
-
-                  <textarea
-                    id="paymentNotes"
-                    name="message"
-                    rows="4"
-                    placeholder="Anything I should know about your payment or project?"></textarea>
-
-                </div>
-
-
-                <label class="payment-agreement">
-
-                  <input
-                    type="checkbox"
-                    id="paymentAgreement"
-                    name="payment_confirmation"
-                    value="Confirmed"
-                    required>
-
-                  <span>
-                    I confirm that the payment information I have
-                    provided is accurate.
-                  </span>
-
-                </label>
-
-
-                <button
-                  type="submit"
-                  class="btn btn-primary payment-submit"
-                  id="paymentSubmit">
-
-                  <span class="button-text">
-                    Submit Payment Confirmation
-                  </span>
-
-                  <span
-                    class="button-loading"
-                    aria-hidden="true">
-                    Sending...
-                  </span>
-
-                </button>
-
-
-                <p
-                  class="form-status"
-                  id="paymentFormStatus"
-                  role="status"
-                  aria-live="polite">
-                </p>
-
-              </form>
-
-
-              <!-- SUCCESS MESSAGE -->
-              <div
-                class="payment-success"
-                id="paymentSuccess"
-                hidden>
-
-                <div class="success-icon">
-                  ✓
-                </div>
-
-                <p class="eyebrow">
-                  CONFIRMATION RECEIVED
-                </p>
-
-                <h3>
-                  Thank you,
-                  <span id="successClientName">
-                    Client
-                  </span>.
-                </h3>
-
-                <p>
-                  Your payment confirmation has been submitted
-                  successfully. I'll verify the transaction and
-                  get back to you with the next steps.
-                </p>
-
-
-                <div class="success-details">
-
-                  <div>
-                    <span>
-                      Reference
-                    </span>
-
-                    <strong id="successReference">
-                      —
-                    </strong>
-                  </div>
-
-                  <div>
-                    <span>
-                      Amount
-                    </span>
-
-                    <strong id="successAmount">
-                      —
-                    </strong>
-                  </div>
-
-                </div>
-
-
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="newPaymentConfirmation">
-
-                  Submit Another Confirmation
-
-                </button>
-
-              </div>
-
-            </div>
-
+          <div>
+            <span>02</span>
+            <p>
+              Keep your transaction/reference message.
+            </p>
+          </div>
+
+          <div>
+            <span>03</span>
+            <p>
+              Complete and submit this confirmation form.
+            </p>
+          </div>
+
+          <div>
+            <span>04</span>
+            <p>
+              I'll verify the payment and contact you.
+            </p>
           </div>
 
         </div>
 
-      </section>
 
-    </article>
+        <div class="payment-note">
 
-  </main>
+          <strong>
+            Important
+          </strong>
 
+          <p>
+            Submitting this form does not automatically confirm
+            your payment. Payment is verified before work begins.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PAYMENT FORM -->
+      <div class="payment-form-wrapper">
+
+        <form
+          id="paymentConfirmationForm"
+          action="https://formspree.io/f/xkgrljpp"
+          method="POST">
+
+          <!-- Formspree settings -->
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Payment Confirmation - Lenox's Creations">
+
+          <input
+            type="hidden"
+            name="_format"
+            value="plain">
+
+
+          <!-- NAME -->
+          <div class="form-group">
+
+            <label for="paymentName">
+              Full Name *
+            </label>
+
+            <input
+              type="text"
+              id="paymentName"
+              name="full_name"
+              placeholder="Your full name"
+              autocomplete="name"
+              required>
+
+          </div>
+
+
+          <!-- PHONE + EMAIL -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="paymentPhone">
+                Phone Number *
+              </label>
+
+              <input
+                type="tel"
+                id="paymentPhone"
+                name="phone"
+                placeholder="07XX XXX XXX"
+                autocomplete="tel"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="paymentEmail">
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="paymentEmail"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email">
+
+            </div>
+
+          </div>
+
+
+          <!-- PAYMENT METHOD + AMOUNT -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label for="paymentMethod">
+                Payment Method *
+              </label>
+
+              <select
+                id="paymentMethod"
+                name="payment_method"
+                required>
+
+                <option value="" selected disabled>
+                  Select payment method
+                </option>
+
+                <option value="M-Pesa Paybill">
+                  M-Pesa Paybill
+                </option>
+
+                <option value="KCB Bank">
+                  KCB Bank
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="paymentAmount">
+                Amount Paid (KSh) *
+              </label>
+
+              <input
+                type="number"
+                id="paymentAmount"
+                name="amount_paid"
+                placeholder="e.g. 5000"
+                min="1"
+                step="1"
+                required>
+
+            </div>
+
+          </div>
+
+
+          <!-- TRANSACTION CODE -->
+          <div class="form-group">
+
+            <label for="transactionCode">
+              Transaction / Reference Code *
+            </label>
+
+            <input
+              type="text"
+              id="transactionCode"
+              name="transaction_code"
+              placeholder="e.g. QAB123XYZ"
+              autocomplete="off"
+              required>
+
+            <small>
+              Enter the transaction code exactly as shown
+              in your payment confirmation.
+            </small>
+
+          </div>
+
+
+          <!-- SERVICE -->
+          <div class="form-group">
+
+            <label for="paymentService">
+              Service Paid For *
+            </label>
+
+            <select
+              id="paymentService"
+              name="service"
+              required>
+
+              <option value="" selected disabled>
+                Select service
+              </option>
+
+              <option value="Web Development">
+                Web Development
+              </option>
+
+              <option value="Graphic Design">
+                Graphic Design
+              </option>
+
+              <option value="AI Solutions">
+                AI Solutions
+              </option>
+
+              <option value="Social Media Management">
+                Social Media Management
+              </option>
+
+              <option value="Poetry & Script Writing">
+                Poetry & Script Writing
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- ADDITIONAL INFORMATION -->
+          <div class="form-group">
+
+            <label for="paymentNotes">
+              Additional Information
+            </label>
+
+            <textarea
+              id="paymentNotes"
+              name="additional_information"
+              rows="4"
+              placeholder="Anything I should know about your payment or project?"></textarea>
+
+          </div>
+
+
+          <!-- AGREEMENT -->
+          <label class="payment-agreement">
+
+            <input
+              type="checkbox"
+              id="paymentAgreement"
+              name="payment_confirmation"
+              value="Confirmed"
+              required>
+
+            <span>
+              I confirm that the payment information I have
+              provided is accurate.
+            </span>
+
+          </label>
+
+
+          <!-- SUBMIT -->
+          <button
+            type="submit"
+            class="btn btn-primary payment-submit"
+            id="paymentSubmit">
+
+            Submit Payment Confirmation
+
+            <ion-icon name="arrow-forward"></ion-icon>
+
+          </button>
+
+
+          <p
+            class="form-status"
+            id="paymentFormStatus"
+            role="status"
+            aria-live="polite">
+          </p>
+
+        </form>
+
+
+        <!-- SUCCESS MESSAGE -->
+        <div
+          class="payment-success"
+          id="paymentSuccess"
+          hidden>
+
+          <div class="success-icon">
+            ✓
+          </div>
+
+          <p class="eyebrow">
+            CONFIRMATION RECEIVED
+          </p>
+
+          <h3>
+            Thank you,
+            <span id="successClientName">
+              Client
+            </span>.
+          </h3>
+
+          <p>
+            Your payment confirmation has been submitted
+            successfully. I'll verify the transaction and
+            contact you with the next steps.
+          </p>
+
+
+          <div class="success-details">
+
+            <div>
+              <span>
+                Reference
+              </span>
+
+              <strong id="successReference">
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>
+                Amount
+              </span>
+
+              <strong id="successAmount">
+                —
+              </strong>
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="newPaymentConfirmation">
+
+            Submit Another Confirmation
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
   <!-- =========================================
        FOOTER

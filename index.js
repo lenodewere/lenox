@@ -338,90 +338,273 @@ if (contactForm) {
    PAYMENT CONFIRMATION
 ========================================= */
 
-const paymentForm =
-    document.querySelector('#paymentConfirmationForm');
+const paymentForm = document.getElementById(
+    'paymentConfirmationForm'
+);
 
-const paymentSuccess =
-    document.querySelector('#paymentSuccess');
+const paymentSuccess = document.getElementById(
+    'paymentSuccess'
+);
 
-const paymentSubmit =
-    document.querySelector('#paymentSubmit');
+const paymentSubmit = document.getElementById(
+    'paymentSubmit'
+);
 
-const paymentStatus =
-    document.querySelector('#paymentFormStatus');
+const paymentStatus = document.getElementById(
+    'paymentFormStatus'
+);
 
-const newPaymentConfirmation =
-    document.querySelector('#newPaymentConfirmation');
+const newPaymentConfirmation = document.getElementById(
+    'newPaymentConfirmation'
+);
 
 
-if (
-    paymentForm &&
-    paymentSuccess &&
-    paymentSubmit &&
-    paymentStatus
-) {
+if (paymentForm) {
 
-    paymentForm.addEventListener('submit', async event => {
+    paymentForm.addEventListener('submit', async function (event) {
 
         event.preventDefault();
 
-        if (paymentSubmit.disabled) return;
+        if (paymentSubmit.disabled) {
+            return;
+        }
 
-
-        /* Reset status */
-
+        /* Clear previous message */
         paymentStatus.textContent = '';
         paymentStatus.className = 'form-status';
 
-
-        /* Loading */
-
+        /* Disable button */
         paymentSubmit.disabled = true;
         paymentSubmit.classList.add('loading');
 
+        const originalButtonText = paymentSubmit.innerHTML;
 
-        const buttonText =
-            paymentSubmit.querySelector('.button-text');
-
-        const buttonLoading =
-            paymentSubmit.querySelector('.button-loading');
+        paymentSubmit.innerHTML =
+            '<ion-icon name="hourglass-outline"></ion-icon> Sending...';
 
 
-        if (buttonText) {
-            buttonText.hidden = true;
-        }
-
-        if (buttonLoading) {
-            buttonLoading.hidden = false;
-        }
-
-
-        /* Collect values before submission */
+        /* Collect form information */
+        const formData = new FormData(paymentForm);
 
         const clientName =
-            document.querySelector('#paymentName')
-                ?.value
-                .trim() || 'Client';
+            document.getElementById('paymentName').value.trim();
 
         const transactionCode =
-            document.querySelector('#transactionCode')
-                ?.value
-                .trim() || '—';
+            document.getElementById('transactionCode').value.trim();
 
         const amount =
-            document.querySelector('#paymentAmount')
-                ?.value
-                .trim() || '0';
+            document.getElementById('paymentAmount').value.trim();
 
 
         try {
 
-            const {
-                response,
-                data
-            } = await submitToFormspree(paymentForm);
+            const response = await fetch(
+                paymentForm.action,
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }
+            );
 
 
+            /* =====================================
+               SUCCESS
+            ===================================== */
+
+            if (response.ok) {
+
+                const successName =
+                    document.getElementById(
+                        'successClientName'
+                    );
+
+                const successReference =
+                    document.getElementById(
+                        'successReference'
+                    );
+
+                const successAmount =
+                    document.getElementById(
+                        'successAmount'
+                    );
+
+
+                if (successName) {
+                    successName.textContent =
+                        clientName || 'Client';
+                }
+
+
+                if (successReference) {
+                    successReference.textContent =
+                        transactionCode || 'Submitted';
+                }
+
+
+                if (successAmount) {
+
+                    const numericAmount =
+                        Number(amount);
+
+                    if (
+                        Number.isFinite(numericAmount) &&
+                        numericAmount > 0
+                    ) {
+
+                        successAmount.textContent =
+                            `KSh ${numericAmount.toLocaleString()}`;
+
+                    } else {
+
+                        successAmount.textContent =
+                            `KSh ${amount}`;
+
+                    }
+                }
+
+
+                /* Hide form */
+                paymentForm.hidden = true;
+
+
+                /* Show success message */
+                paymentSuccess.hidden = false;
+
+
+                /* Scroll to success */
+                setTimeout(() => {
+
+                    paymentSuccess.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                }, 150);
+
+
+            } else {
+
+                /* =================================
+                   FORMSPREE ERROR
+                ================================= */
+
+                let errorMessage =
+                    'Something went wrong. Please try again.';
+
+                try {
+
+                    const data =
+                        await response.json();
+
+                    if (
+                        data &&
+                        Array.isArray(data.errors) &&
+                        data.errors.length
+                    ) {
+
+                        errorMessage =
+                            data.errors
+                                .map(error => error.message)
+                                .join(', ');
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        'Could not read Formspree error:',
+                        error
+                    );
+
+                }
+
+
+                paymentStatus.textContent =
+                    errorMessage;
+
+                paymentStatus.classList.add(
+                    'error'
+                );
+
+
+                console.error(
+                    'Formspree response:',
+                    response.status,
+                    response.statusText
+                );
+            }
+
+
+        } catch (error) {
+
+            /* =================================
+               CONNECTION ERROR
+            ================================= */
+
+            console.error(
+                'Payment submission error:',
+                error
+            );
+
+            paymentStatus.textContent =
+                'Unable to submit your confirmation. Please check your internet connection and try again.';
+
+            paymentStatus.classList.add(
+                'error'
+            );
+
+
+        } finally {
+
+            paymentSubmit.disabled = false;
+
+            paymentSubmit.classList.remove(
+                'loading'
+            );
+
+            paymentSubmit.innerHTML =
+                originalButtonText;
+
+        }
+
+    });
+
+}
+
+
+/* =========================================
+   SUBMIT ANOTHER PAYMENT
+========================================= */
+
+if (newPaymentConfirmation) {
+
+    newPaymentConfirmation.addEventListener(
+        'click',
+        function () {
+
+            paymentSuccess.hidden = true;
+
+            paymentForm.hidden = false;
+
+            paymentForm.reset();
+
+            paymentStatus.textContent = '';
+
+            paymentStatus.className =
+                'form-status';
+
+
+            paymentForm.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+        }
+    );
+
+}
             /* =====================================
                SUCCESS
             ===================================== */
