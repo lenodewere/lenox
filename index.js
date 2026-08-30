@@ -13,7 +13,6 @@ if (navToggleBtn && header) {
         const isActive = header.classList.toggle('nav-active');
 
         navToggleBtn.classList.toggle('active');
-
         navToggleBtn.setAttribute(
             'aria-expanded',
             isActive ? 'true' : 'false'
@@ -28,17 +27,14 @@ if (navToggleBtn && header) {
 
 navbarLinks.forEach(link => {
     link.addEventListener('click', () => {
+
         if (header) {
             header.classList.remove('nav-active');
         }
 
         if (navToggleBtn) {
             navToggleBtn.classList.remove('active');
-
-            navToggleBtn.setAttribute(
-                'aria-expanded',
-                'false'
-            );
+            navToggleBtn.setAttribute('aria-expanded', 'false');
         }
     });
 });
@@ -51,6 +47,7 @@ navbarLinks.forEach(link => {
 const backTopBtn = document.querySelector('[data-back-to-top]');
 
 function handleScroll() {
+
     const scrolled = window.scrollY >= 100;
 
     if (header) {
@@ -63,7 +60,6 @@ function handleScroll() {
 }
 
 window.addEventListener('scroll', handleScroll);
-
 handleScroll();
 
 
@@ -72,7 +68,9 @@ handleScroll();
 ========================================= */
 
 if (backTopBtn) {
+
     backTopBtn.addEventListener('click', event => {
+
         event.preventDefault();
 
         window.scrollTo({
@@ -88,6 +86,7 @@ if (backTopBtn) {
 ========================================= */
 
 window.addEventListener('resize', () => {
+
     if (window.innerWidth >= 992) {
 
         if (header) {
@@ -110,8 +109,7 @@ window.addEventListener('resize', () => {
    COPY PAYMENT DETAILS
 ========================================= */
 
-const copyButtons =
-    document.querySelectorAll('.copy-payment');
+const copyButtons = document.querySelectorAll('.copy-payment');
 
 copyButtons.forEach(button => {
 
@@ -135,17 +133,13 @@ copyButtons.forEach(button => {
             setTimeout(() => {
 
                 button.innerHTML = originalText;
-
                 button.classList.remove('copied');
 
             }, 2000);
 
         } catch (error) {
 
-            /* Fallback for older browsers */
-
-            const textArea =
-                document.createElement('textarea');
+            const textArea = document.createElement('textarea');
 
             textArea.value = value;
 
@@ -168,7 +162,6 @@ copyButtons.forEach(button => {
                 setTimeout(() => {
 
                     button.innerHTML = originalText;
-
                     button.classList.remove('copied');
 
                 }, 2000);
@@ -178,13 +171,51 @@ copyButtons.forEach(button => {
                 alert(
                     `Copy failed. Please copy this manually:\n${value}`
                 );
-
             }
 
             document.body.removeChild(textArea);
         }
     });
 });
+
+
+/* =========================================
+   FORMSPREE HELPER
+========================================= */
+
+async function submitToFormspree(form) {
+
+    const formData = new FormData(form);
+
+    /*
+     * Formspree works best when the request explicitly
+     * asks for a JSON response.
+     */
+
+    const response = await fetch(form.action, {
+
+        method: 'POST',
+
+        body: formData,
+
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+
+    let data = null;
+
+    try {
+        data = await response.json();
+    } catch (error) {
+        data = null;
+    }
+
+    return {
+        response,
+        data
+    };
+}
 
 
 /* =========================================
@@ -199,142 +230,107 @@ if (contactForm) {
     const submitBtn =
         contactForm.querySelector('.btn-submit');
 
-    const originalSubmitText =
-        submitBtn
-            ? submitBtn.innerHTML
-            : 'Send Project Request';
+    let status =
+        contactForm.querySelector('.form-status');
 
-    contactForm.addEventListener(
-        'submit',
-        async event => {
+    if (!status) {
 
-            event.preventDefault();
+        status = document.createElement('p');
 
-            if (!submitBtn) return;
+        status.className = 'form-status';
 
-            if (submitBtn.disabled) return;
+        status.setAttribute('role', 'status');
+        status.setAttribute('aria-live', 'polite');
 
-            submitBtn.disabled = true;
+        contactForm.appendChild(status);
+    }
 
-            submitBtn.classList.add('loading');
 
-            submitBtn.innerHTML =
-                '<span>Sending...</span>';
+    contactForm.addEventListener('submit', async event => {
 
-            let status =
-                contactForm.querySelector('.form-status');
+        event.preventDefault();
 
-            if (!status) {
+        if (!submitBtn || submitBtn.disabled) return;
 
-                status =
-                    document.createElement('p');
 
-                status.className =
-                    'form-status';
+        /* Reset status */
 
-                status.setAttribute(
-                    'role',
-                    'status'
-                );
+        status.textContent = '';
+        status.className = 'form-status';
 
-                status.setAttribute(
-                    'aria-live',
-                    'polite'
-                );
 
-                contactForm.appendChild(status);
-            }
+        /* Loading */
 
-            status.textContent = '';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
 
-            status.className = 'form-status';
+        const originalText = submitBtn.innerHTML;
 
-            const formData =
-                new FormData(contactForm);
+        submitBtn.innerHTML =
+            '<span>Sending...</span>';
 
-            try {
 
-                const response =
-                    await fetch(
-                        contactForm.action,
-                        {
-                            method: 'POST',
+        try {
 
-                            body: formData,
+            const {
+                response,
+                data
+            } = await submitToFormspree(contactForm);
 
-                            headers: {
-                                Accept:
-                                    'application/json'
-                            }
-                        }
-                    );
 
-                if (response.ok) {
-
-                    status.textContent =
-                        'Message sent successfully! I’ll get back to you as soon as possible.';
-
-                    status.classList.add(
-                        'success'
-                    );
-
-                    contactForm.reset();
-
-                } else {
-
-                    let message =
-                        'Something went wrong. Please try again.';
-
-                    try {
-
-                        const data =
-                            await response.json();
-
-                        if (data.errors?.length) {
-
-                            message =
-                                data.errors
-                                    .map(
-                                        error =>
-                                            error.message
-                                    )
-                                    .join(', ');
-                        }
-
-                    } catch (error) {
-                        /* Keep default message */
-                    }
-
-                    status.textContent =
-                        message;
-
-                    status.classList.add(
-                        'error'
-                    );
-                }
-
-            } catch (error) {
+            if (response.ok) {
 
                 status.textContent =
-                    'Unable to send your message. Please check your internet connection and try again.';
+                    'Message sent successfully! I’ll get back to you as soon as possible.';
 
-                status.classList.add(
-                    'error'
+                status.classList.add('success');
+
+                contactForm.reset();
+
+            } else {
+
+                let message =
+                    'Something went wrong. Please try again.';
+
+                if (data && Array.isArray(data.errors)) {
+
+                    message = data.errors
+                        .map(error => error.message)
+                        .join(', ');
+                }
+
+                console.error(
+                    'Contact Formspree Error:',
+                    response.status,
+                    data
                 );
 
-            } finally {
-
-                submitBtn.disabled = false;
-
-                submitBtn.classList.remove(
-                    'loading'
-                );
-
-                submitBtn.innerHTML =
-                    originalSubmitText;
+                status.textContent = message;
+                status.classList.add('error');
             }
+
+        } catch (error) {
+
+            console.error(
+                'Contact form network error:',
+                error
+            );
+
+            status.textContent =
+                'Unable to connect to the form service. Please check your internet connection and try again.';
+
+            status.classList.add('error');
+
+        } finally {
+
+            submitBtn.disabled = false;
+
+            submitBtn.classList.remove('loading');
+
+            submitBtn.innerHTML = originalText;
         }
-    );
+
+    });
 }
 
 
@@ -343,29 +339,19 @@ if (contactForm) {
 ========================================= */
 
 const paymentForm =
-    document.querySelector(
-        '#paymentConfirmationForm'
-    );
+    document.querySelector('#paymentConfirmationForm');
 
 const paymentSuccess =
-    document.querySelector(
-        '#paymentSuccess'
-    );
+    document.querySelector('#paymentSuccess');
 
 const paymentSubmit =
-    document.querySelector(
-        '#paymentSubmit'
-    );
+    document.querySelector('#paymentSubmit');
 
 const paymentStatus =
-    document.querySelector(
-        '#paymentFormStatus'
-    );
+    document.querySelector('#paymentFormStatus');
 
 const newPaymentConfirmation =
-    document.querySelector(
-        '#newPaymentConfirmation'
-    );
+    document.querySelector('#newPaymentConfirmation');
 
 
 if (
@@ -375,225 +361,205 @@ if (
     paymentStatus
 ) {
 
-    paymentForm.addEventListener(
-        'submit',
-        async event => {
+    paymentForm.addEventListener('submit', async event => {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            if (paymentSubmit.disabled) return;
+        if (paymentSubmit.disabled) return;
 
-            paymentStatus.textContent = '';
 
-            paymentStatus.className =
-                'form-status';
+        /* Reset status */
 
-            paymentSubmit.disabled = true;
+        paymentStatus.textContent = '';
+        paymentStatus.className = 'form-status';
 
-            paymentSubmit.classList.add(
-                'loading'
+
+        /* Loading */
+
+        paymentSubmit.disabled = true;
+        paymentSubmit.classList.add('loading');
+
+
+        const buttonText =
+            paymentSubmit.querySelector('.button-text');
+
+        const buttonLoading =
+            paymentSubmit.querySelector('.button-loading');
+
+
+        if (buttonText) {
+            buttonText.hidden = true;
+        }
+
+        if (buttonLoading) {
+            buttonLoading.hidden = false;
+        }
+
+
+        /* Collect values before submission */
+
+        const clientName =
+            document.querySelector('#paymentName')
+                ?.value
+                .trim() || 'Client';
+
+        const transactionCode =
+            document.querySelector('#transactionCode')
+                ?.value
+                .trim() || '—';
+
+        const amount =
+            document.querySelector('#paymentAmount')
+                ?.value
+                .trim() || '0';
+
+
+        try {
+
+            const {
+                response,
+                data
+            } = await submitToFormspree(paymentForm);
+
+
+            /* =====================================
+               SUCCESS
+            ===================================== */
+
+            if (response.ok) {
+
+                const successName =
+                    document.querySelector(
+                        '#successClientName'
+                    );
+
+                const successReference =
+                    document.querySelector(
+                        '#successReference'
+                    );
+
+                const successAmount =
+                    document.querySelector(
+                        '#successAmount'
+                    );
+
+
+                if (successName) {
+
+                    successName.textContent =
+                        clientName;
+                }
+
+
+                if (successReference) {
+
+                    successReference.textContent =
+                        transactionCode;
+                }
+
+
+                if (successAmount) {
+
+                    const numericAmount =
+                        Number(amount);
+
+                    successAmount.textContent =
+                        Number.isFinite(numericAmount)
+                            ? `KSh ${numericAmount.toLocaleString()}`
+                            : `KSh ${amount}`;
+                }
+
+
+                /* Hide form */
+
+                paymentForm.hidden = true;
+
+
+                /* Show success */
+
+                paymentSuccess.hidden = false;
+
+
+                /* Scroll */
+
+                setTimeout(() => {
+
+                    paymentSuccess.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                }, 100);
+
+            }
+
+
+            /* =====================================
+               FORMSPREE ERROR
+            ===================================== */
+
+            else {
+
+                let errorMessage =
+                    'Something went wrong. Please try again.';
+
+
+                if (
+                    data &&
+                    Array.isArray(data.errors)
+                ) {
+
+                    errorMessage =
+                        data.errors
+                            .map(error => error.message)
+                            .join(', ');
+                }
+
+
+                console.error(
+                    'Payment Formspree Error:',
+                    response.status,
+                    data
+                );
+
+
+                paymentStatus.textContent =
+                    errorMessage;
+
+                paymentStatus.classList.add('error');
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                'Payment confirmation error:',
+                error
             );
 
-            const buttonText =
-                paymentSubmit.querySelector(
-                    '.button-text'
-                );
 
-            const buttonLoading =
-                paymentSubmit.querySelector(
-                    '.button-loading'
-                );
+            paymentStatus.textContent =
+                'Unable to connect to the payment confirmation service. Please check your internet connection and try again.';
+
+            paymentStatus.classList.add('error');
+
+        } finally {
+
+            paymentSubmit.disabled = false;
+
+            paymentSubmit.classList.remove('loading');
+
 
             if (buttonText) {
-                buttonText.hidden = true;
+                buttonText.hidden = false;
             }
 
             if (buttonLoading) {
-                buttonLoading.hidden = false;
-            }
-
-            const formData =
-                new FormData(paymentForm);
-
-            const clientName =
-                document
-                    .querySelector('#paymentName')
-                    ?.value
-                    .trim() || 'Client';
-
-            const transactionCode =
-                document
-                    .querySelector('#transactionCode')
-                    ?.value
-                    .trim() || '—';
-
-            const amount =
-                document
-                    .querySelector('#paymentAmount')
-                    ?.value
-                    .trim() || '0';
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        paymentForm.action,
-                        {
-                            method: 'POST',
-
-                            body: formData,
-
-                            headers: {
-                                Accept:
-                                    'application/json'
-                            }
-                        }
-                    );
-
-
-                if (response.ok) {
-
-                    /* ---------------------------------
-                       UPDATE SUCCESS INFORMATION
-                    --------------------------------- */
-
-                    const successName =
-                        document.querySelector(
-                            '#successClientName'
-                        );
-
-                    const successReference =
-                        document.querySelector(
-                            '#successReference'
-                        );
-
-                    const successAmount =
-                        document.querySelector(
-                            '#successAmount'
-                        );
-
-
-                    if (successName) {
-
-                        successName.textContent =
-                            clientName;
-                    }
-
-
-                    if (successReference) {
-
-                        successReference.textContent =
-                            transactionCode;
-                    }
-
-
-                    if (successAmount) {
-
-                        const numericAmount =
-                            Number(amount);
-
-                        successAmount.textContent =
-                            Number.isFinite(
-                                numericAmount
-                            )
-                                ? `KSh ${numericAmount.toLocaleString()}`
-                                : `KSh ${amount}`;
-                    }
-
-
-                    /* ---------------------------------
-                       HIDE FORM
-                    --------------------------------- */
-
-                    paymentForm.hidden = true;
-
-
-                    /* ---------------------------------
-                       SHOW SUCCESS
-                    --------------------------------- */
-
-                    paymentSuccess.hidden = false;
-
-
-                    /* ---------------------------------
-                       SCROLL TO SUCCESS
-                    --------------------------------- */
-
-                    setTimeout(() => {
-
-                        paymentSuccess.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center'
-                        });
-
-                    }, 100);
-
-
-                } else {
-
-                    let errorMessage =
-                        'Something went wrong. Please try again.';
-
-                    try {
-
-                        const data =
-                            await response.json();
-
-                        if (data.errors?.length) {
-
-                            errorMessage =
-                                data.errors
-                                    .map(
-                                        error =>
-                                            error.message
-                                    )
-                                    .join(', ');
-                        }
-
-                    } catch (error) {
-                        /* Keep default error */
-                    }
-
-
-                    paymentStatus.textContent =
-                        errorMessage;
-
-                    paymentStatus.classList.add(
-                        'error'
-                    );
-                }
-
-
-            } catch (error) {
-
-                paymentStatus.textContent =
-                    'Unable to submit your confirmation. Please check your internet connection and try again.';
-
-                paymentStatus.classList.add(
-                    'error'
-                );
-
-
-            } finally {
-
-                paymentSubmit.disabled = false;
-
-                paymentSubmit.classList.remove(
-                    'loading'
-                );
-
-
-                if (buttonText) {
-                    buttonText.hidden = false;
-                }
-
-                if (buttonLoading) {
-                    buttonLoading.hidden = true;
-                }
+                buttonLoading.hidden = true;
             }
         }
-    );
+
+    });
 }
 
 
@@ -608,57 +574,42 @@ if (
     paymentStatus
 ) {
 
-    newPaymentConfirmation.addEventListener(
-        'click',
-        () => {
+    newPaymentConfirmation.addEventListener('click', () => {
 
-            paymentSuccess.hidden = true;
+        paymentSuccess.hidden = true;
 
-            paymentForm.hidden = false;
+        paymentForm.hidden = false;
 
-            paymentForm.reset();
+        paymentForm.reset();
 
-            paymentStatus.textContent = '';
-
-            paymentStatus.className =
-                'form-status';
+        paymentStatus.textContent = '';
+        paymentStatus.className = 'form-status';
 
 
-            paymentForm.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-
-        }
-    );
+        paymentForm.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
 }
 
 
 /* =========================================
-   PAYMENT METHOD → SERVICE HELPER
+   PAYMENT METHOD SELECT
 ========================================= */
 
 const paymentMethod =
-    document.querySelector(
-        '#paymentMethod'
-    );
+    document.querySelector('#paymentMethod');
 
 if (paymentMethod) {
 
-    paymentMethod.addEventListener(
-        'change',
-        () => {
+    paymentMethod.addEventListener('change', () => {
 
-            const selected =
-                paymentMethod.value;
-
-            paymentMethod.classList.toggle(
-                'selected',
-                selected !== ''
-            );
-
-        }
-    );
+        paymentMethod.classList.toggle(
+            'selected',
+            paymentMethod.value !== ''
+        );
+    });
 }
 
 
@@ -667,9 +618,7 @@ if (paymentMethod) {
 ========================================= */
 
 const yearElements =
-    document.querySelectorAll(
-        '[data-current-year]'
-    );
+    document.querySelectorAll('[data-current-year]');
 
 yearElements.forEach(element => {
 
