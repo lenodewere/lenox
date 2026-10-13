@@ -24,10 +24,10 @@ Contributions to this website are welcomed! If you have ideas for new features, 
 
 ## Developer
 
-- [**Instagram**](https://www.instagram.com/i.am_lennie)
+- [**Instagram**](https://www.instagram.com/simply_.lennie)
 - [**WhatsApp**](https://wa.me/256726183520)
 - [**Facebook**](https://www.facebook.com/lenode.khns)
-- [**Twitter**](https://x.com/i_am_lennie_)
+- [**Twitter**](https://x.com/lenoxscreations)
 
 ![Decorative line](https://i.imgur.com/LyHic3i.gif)
 
